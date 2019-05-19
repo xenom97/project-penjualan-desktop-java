@@ -20,6 +20,7 @@ public class barang extends javax.swing.JFrame {
 
     public barang() {
         initComponents();
+        setLocationRelativeTo(null);
         kosong();
         aktif();
         datatable();
@@ -115,7 +116,7 @@ public class barang extends javax.swing.JFrame {
 
         jLabel6.setText("Kode Barang");
 
-        btnSimpan.setText("SImpan");
+        btnSimpan.setText("Simpan");
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanActionPerformed(evt);

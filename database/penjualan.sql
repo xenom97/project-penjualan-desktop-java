@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 29, 2019 at 04:33 PM
--- Server version: 5.7.25-0ubuntu0.18.04.2
--- PHP Version: 7.2.17-0ubuntu0.18.04.1
+-- Host: localhost:3306
+-- Generation Time: May 19, 2019 at 10:50 AM
+-- Server version: 5.7.21-1
+-- PHP Version: 7.2.4-1+b1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -47,6 +45,32 @@ INSERT INTO `barang` (`kode_barang`, `nama`, `jenis`, `harga_beli`, `harga_jual`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `isi`
+--
+
+CREATE TABLE `isi` (
+  `kd_barang` varchar(10) NOT NULL,
+  `id_nota` varchar(10) NOT NULL,
+  `harga_beli` int(11) NOT NULL,
+  `harga_jual` int(11) NOT NULL,
+  `qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nota`
+--
+
+CREATE TABLE `nota` (
+  `id_nota` varchar(10) NOT NULL,
+  `tanggal` date NOT NULL,
+  `id_pelanggan` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pelanggan`
 --
 
@@ -79,11 +103,16 @@ ALTER TABLE `barang`
   ADD PRIMARY KEY (`kode_barang`);
 
 --
+-- Indexes for table `nota`
+--
+ALTER TABLE `nota`
+  ADD PRIMARY KEY (`id_nota`);
+
+--
 -- Indexes for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`id_pelanggan`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

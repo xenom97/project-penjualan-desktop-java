@@ -22,6 +22,7 @@ public class pelanggan extends javax.swing.JFrame {
 
     public pelanggan() {
         initComponents();
+        setLocationRelativeTo(null);
         kosong();
         aktif();
         datatable();
