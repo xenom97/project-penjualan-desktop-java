@@ -89,7 +89,7 @@ public class nota extends javax.swing.JFrame {
         txtnm.setText(nama);
         txtalmt.setText(almt);
     }
-    
+
     public void barangTerpilih() {
         popUpBarang Pb = new popUpBarang();
         Pb.barang = this;
@@ -134,7 +134,7 @@ public class nota extends javax.swing.JFrame {
         txtqty = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txttotal = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        btambah = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jtgl = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
@@ -230,9 +230,20 @@ public class nota extends javax.swing.JFrame {
 
         jLabel11.setText("QTY");
 
+        txtqty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtqtyActionPerformed(evt);
+            }
+        });
+
         jLabel12.setText("Total");
 
-        jButton3.setText("Tambah");
+        btambah.setText("Tambah");
+        btambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btambahActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -241,7 +252,7 @@ public class nota extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btambah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -297,7 +308,7 @@ public class nota extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(btambah)
                 .addContainerGap())
         );
 
@@ -444,6 +455,35 @@ public class nota extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnKeluarActionPerformed
 
+    private void txtqtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtqtyActionPerformed
+        int xhrgj = Integer.parseInt(txthj.getText());
+        int xqty = Integer.parseInt(txtqty.getText());
+        int xjml = xhrgj * xqty;
+        txttotal.setText(String.valueOf(xjml));
+    }//GEN-LAST:event_txtqtyActionPerformed
+
+    private void btambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btambahActionPerformed
+        try {
+            String kode = txtkdbrg.getText();
+            String nama = txtnmbrg.getText();
+            int hargab = Integer.parseInt(txthb.getText());
+            int hargaj = Integer.parseInt(txthj.getText());
+            int qty = Integer.parseInt(txtqty.getText());
+            int total = Integer.parseInt(txttotal.getText());
+            tabmode.addRow(new Object[]{kode, nama, hargab, hargaj, qty, total});
+            tblTransaksi.setModel(tabmode);
+        } catch (Exception e) {
+            System.out.println("Error : " + e);
+        }
+        txtkdbrg.setText("");
+        txtnmbrg.setText("");
+        txthb.setText("");
+        txthj.setText("");
+        txtqty.setText("");
+        txttotal.setText("");
+//        hitung();
+    }//GEN-LAST:event_btambahActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -480,10 +520,10 @@ public class nota extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btambah;
     private javax.swing.JButton btnCariBarang;
     private javax.swing.JButton btnCariPelanggan;
     private javax.swing.JButton btnKeluar;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
