@@ -99,6 +99,15 @@ public class nota extends javax.swing.JFrame {
         txthj.setText(hj);
     }
 
+    public void hitung() {
+        int total = 0;
+        for (int i = 0; i < tblTransaksi.getRowCount(); i++) {
+            int amount = Integer.valueOf(tblTransaksi.getValueAt(i, 5).toString());
+            total += amount;
+        }
+        txtTotalHrg.setText(Integer.toString(total));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -140,11 +149,11 @@ public class nota extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTransaksi = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnHapus = new javax.swing.JButton();
+        btnSimpan = new javax.swing.JButton();
+        btnBatal = new javax.swing.JButton();
         btnKeluar = new javax.swing.JButton();
-        jTextField10 = new javax.swing.JTextField();
+        txtTotalHrg = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -347,11 +356,26 @@ public class nota extends javax.swing.JFrame {
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
-        jButton4.setText("Hapus");
+        btnHapus.setText("Hapus");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Simpan");
+        btnSimpan.setText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Batal");
+        btnBatal.setText("Batal");
+        btnBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBatalActionPerformed(evt);
+            }
+        });
 
         btnKeluar.setText("Keluar");
         btnKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -388,18 +412,18 @@ public class nota extends javax.swing.JFrame {
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4))
+                        .addComponent(btnHapus))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jButton5)
+                        .addComponent(btnSimpan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)
+                        .addComponent(btnBatal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnKeluar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtTotalHrg, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -420,13 +444,13 @@ public class nota extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(btnHapus)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
+                    .addComponent(btnSimpan)
+                    .addComponent(btnBatal)
                     .addComponent(btnKeluar)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTotalHrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -456,10 +480,10 @@ public class nota extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKeluarActionPerformed
 
     private void txtqtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtqtyActionPerformed
-        int xhrgj = Integer.parseInt(txthj.getText());
-        int xqty = Integer.parseInt(txtqty.getText());
-        int xjml = xhrgj * xqty;
-        txttotal.setText(String.valueOf(xjml));
+        int hargaJual = Integer.parseInt(txthj.getText());
+        int quantity = Integer.parseInt(txtqty.getText());
+        int jumlah = hargaJual * quantity;
+        txttotal.setText(String.valueOf(jumlah));
     }//GEN-LAST:event_txtqtyActionPerformed
 
     private void btambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btambahActionPerformed
@@ -481,8 +505,59 @@ public class nota extends javax.swing.JFrame {
         txthj.setText("");
         txtqty.setText("");
         txttotal.setText("");
-//        hitung();
+        hitung();
     }//GEN-LAST:event_btambahActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        int index = tblTransaksi.getSelectedRow();
+        tabmode.removeRow(index);
+        tblTransaksi.setModel(tabmode);
+        hitung();
+    }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String fd = sdf.format(jtgl.getValue());
+        String sql = "INSERT INTO nota VALUES (?, ?, ?)";
+        String zsql = "INSERT INTO isi VALUES (?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement stat = conn.prepareStatement(sql);
+            stat.setString(1, txtidnota.getText());
+            stat.setString(2, fd);
+            stat.setString(3, txtid.getText());
+
+            stat.executeUpdate();
+
+            int t = tblTransaksi.getRowCount();
+            for (int i = 0; i < t; i++) {
+                String xkd = tblTransaksi.getValueAt(i, 0).toString();
+                String xhb = tblTransaksi.getValueAt(i, 2).toString();
+                String xhj = tblTransaksi.getValueAt(i, 3).toString();
+                String xqty = tblTransaksi.getValueAt(i, 4).toString();
+
+                PreparedStatement stat2 = conn.prepareStatement(zsql);
+                stat2.setString(1, txtidnota.getText());
+                stat2.setString(2, xkd);
+                stat2.setString(3, xhb);
+                stat2.setString(4, xhj);
+                stat2.setString(5, xqty);
+
+                stat2.executeUpdate();
+            }
+            JOptionPane.showMessageDialog(null, "Data berhasil disimpan");
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, "Data gagal disimpan" + err);
+        }
+        kosong();
+        aktif();
+        autonumber();
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+        kosong();
+        aktif();
+        autonumber();
+    }//GEN-LAST:event_btnBatalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -521,12 +596,12 @@ public class nota extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btambah;
+    private javax.swing.JButton btnBatal;
     private javax.swing.JButton btnCariBarang;
     private javax.swing.JButton btnCariPelanggan;
+    private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnKeluar;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton btnSimpan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -545,9 +620,9 @@ public class nota extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JSpinner jtgl;
     private javax.swing.JTable tblTransaksi;
+    private javax.swing.JTextField txtTotalHrg;
     private javax.swing.JTextArea txtalmt;
     private javax.swing.JTextField txthb;
     private javax.swing.JTextField txthj;

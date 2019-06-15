@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 19, 2019 at 10:50 AM
+-- Generation Time: Jun 15, 2019 at 01:56 PM
 -- Server version: 5.7.21-1
 -- PHP Version: 7.2.4-1+b1
 
@@ -40,7 +40,8 @@ CREATE TABLE `barang` (
 
 INSERT INTO `barang` (`kode_barang`, `nama`, `jenis`, `harga_beli`, `harga_jual`) VALUES
 ('002', 'Pensil', 'Alat Tulis', 2500, 3000),
-('003', 'LCD AAA', 'Elektronik', 900000, 1200000);
+('003', 'LCD AAA', 'Elektronik', 900000, 1200000),
+('004', 'Mouse', 'Elektronik', 55000, 80000);
 
 -- --------------------------------------------------------
 
@@ -49,12 +50,22 @@ INSERT INTO `barang` (`kode_barang`, `nama`, `jenis`, `harga_beli`, `harga_jual`
 --
 
 CREATE TABLE `isi` (
-  `kd_barang` varchar(10) NOT NULL,
   `id_nota` varchar(10) NOT NULL,
+  `kd_barang` varchar(10) NOT NULL,
   `harga_beli` int(11) NOT NULL,
   `harga_jual` int(11) NOT NULL,
   `qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `isi`
+--
+
+INSERT INTO `isi` (`id_nota`, `kd_barang`, `harga_beli`, `harga_jual`, `qty`) VALUES
+('IN0001', '003', 900000, 1200000, 1),
+('IN0001', '004', 55000, 80000, 2),
+('IN0002', '002', 2500, 3000, 10),
+('IN0003', '004', 55000, 80000, 1);
 
 -- --------------------------------------------------------
 
@@ -67,6 +78,15 @@ CREATE TABLE `nota` (
   `tanggal` date NOT NULL,
   `id_pelanggan` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nota`
+--
+
+INSERT INTO `nota` (`id_nota`, `tanggal`, `id_pelanggan`) VALUES
+('IN0001', '2019-05-31', '001'),
+('IN0002', '2019-05-31', '002'),
+('IN0003', '2019-05-31', '005');
 
 -- --------------------------------------------------------
 
@@ -90,7 +110,8 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jenis_kelamin`, `no_
 ('001', 'Ahmad P', 'Laki-Laki', '089672446477', 'Depok'),
 ('002', 'Steve Job', 'Laki-Laki', '0187674567', 'New York'),
 ('003', 'Anonymous', 'Perempuan', '0123456789', 'DKI Jakarta'),
-('004', 'Saya', 'Perempuan', '0219999999', 'Jakarta Selatan');
+('004', 'Saya', 'Perempuan', '0219999999', 'Jakarta Selatan'),
+('005', 'Kamu', 'Perempuan', '0898989898989', 'Bogor');
 
 --
 -- Indexes for dumped tables
