@@ -7,10 +7,16 @@ package tampilan;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JSpinner;
 import koneksi.koneksi;
+
+//Report
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -52,6 +58,7 @@ public class nota extends javax.swing.JFrame {
         txthj.setText("");
         txtqty.setText("");
         txttotal.setText("");
+        txtTotalHrg.setText("");
     }
 
     protected void autonumber() {
@@ -106,6 +113,18 @@ public class nota extends javax.swing.JFrame {
             total += amount;
         }
         txtTotalHrg.setText(Integer.toString(total));
+    }
+
+    public void cetak() {
+        try {
+            String path = "./src/laporan/nota.jasper"; // letakpenyimpanan report
+            HashMap parameter = new HashMap();
+            parameter.put("idnota", txtidnota.getText());
+            JasperPrint print = JasperFillManager.fillReport(path, parameter, conn);
+            JasperViewer.viewReport(print, false);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Dokumen Tidak Ada " + ex);
+        }
     }
 
     /**
@@ -473,10 +492,7 @@ public class nota extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCariBarangActionPerformed
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
-        int selectedOption = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin akan keluar?", "Tutup Aplikasi", JOptionPane.YES_NO_OPTION);
-        if (selectedOption == JOptionPane.YES_OPTION) {
-            System.exit(0);
-        }
+        dispose();
     }//GEN-LAST:event_btnKeluarActionPerformed
 
     private void txtqtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtqtyActionPerformed
@@ -545,6 +561,7 @@ public class nota extends javax.swing.JFrame {
                 stat2.executeUpdate();
             }
             JOptionPane.showMessageDialog(null, "Data berhasil disimpan");
+            cetak();
         } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, "Data gagal disimpan" + err);
         }
