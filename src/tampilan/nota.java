@@ -500,6 +500,7 @@ public class nota extends javax.swing.JFrame {
         int quantity = Integer.parseInt(txtqty.getText());
         int jumlah = hargaJual * quantity;
         txttotal.setText(String.valueOf(jumlah));
+        btambah.requestFocus();
     }//GEN-LAST:event_txtqtyActionPerformed
 
     private void btambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btambahActionPerformed
@@ -522,6 +523,7 @@ public class nota extends javax.swing.JFrame {
         txtqty.setText("");
         txttotal.setText("");
         hitung();
+        txtqty.requestFocus();
     }//GEN-LAST:event_btambahActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
